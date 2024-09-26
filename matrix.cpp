@@ -134,6 +134,9 @@ IntMatrix multiply(IntMatrix a, IntMatrix b){
 //             if (colindex < a[0].size()){
 //                 colindex++;
 //             }
+//             else{
+//                 break;
+//             }
 //         }
 //         if (a[i][colindex]!=0){
 //             // Dividing the Row by the Initial non-zero value 
@@ -268,6 +271,9 @@ IntMatrix inverse(IntMatrix a){
         while(a[i][colindex] == 0){
             if (colindex < a[0].size()){
                 colindex++;
+            }
+            else{
+                std::cout << "\n\n ERROR : The Given matrix is not invertible !!! \n\n" << std::endl;
             }
         }
         if (a[i][colindex]!=0){

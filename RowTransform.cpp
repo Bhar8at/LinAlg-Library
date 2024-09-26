@@ -5,7 +5,7 @@ typedef  std::vector<float> intRow;
 
 
 float roundTo4Decimals(float value) {
-    return round(value * 10000) / 10000;
+    return round(value * 10000000000) / 10000000000;
 }
 
 intRow Rowdiv (intRow Row, float x){
