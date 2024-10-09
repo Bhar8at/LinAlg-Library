@@ -11,5 +11,6 @@ intRow Rowmultiply (intRow Row, float x);
 intRow RowsubRow (intRow Row1, intRow Row2);
 intRow RowadddRow (intRow Row1, intRow Row2);
 float roundTo4Decimals(float value);
+intRow Rowdot(intRow Row1, intRow Row2);
 
 #endif
