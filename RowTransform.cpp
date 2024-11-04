@@ -47,10 +47,3 @@ intRow RowadddRow (intRow Row1, intRow Row2){
     return Row3;
 }
 
-intRow Rowdot (intRow Row1, intRow Row2){
-    intRow Row3;
-    for (int i = 0; i < Row1.size(); i++){
-        Row3.push_back(roundTo4Decimals(Row1[i] * Row2[i]));
-    }
-    return Row3;
-}

@@ -73,266 +73,149 @@ IntMatrix multiply(IntMatrix a, IntMatrix b){
     }    
 }
 
-// // Incase I want to ever debug and make it better.
-// IntMatrix inverse(IntMatrix a){
-//     int am = a.size();
-//     int an = a[0].size();
-//     IntMatrix I;
-//     intRow Row;
-//     if (am != an){
-//         std::cerr << "The Given matrix is not a Square Matrix and hence the Inverse cannot be computed!" << std::endl;
-//         return a;
-//     }
-
-//     // Creating an Identity Matrix
-//     for (int i = 0 ; i < am; i++){
-//         Row.clear();
-//         for (int j = 0 ; j < am; j++){
-//             if (i ==j){
-//                 Row.push_back(1);
-//             } 
-//             else{
-//                 Row.push_back(0);
-//             }
-//         }
-//         I.push_back(Row);
-//     }
- 
-//     // Finding the number of zeros in each order 
-//     std::vector<int> n0;
-//     std::vector<float> temp;
-//     for (int i = 0; i < a.size(); i++){
-//         n0.push_back(0);
-//         for ( int j = 0 ; j < a[0].size(); j++){
-//             if (a[i][j] == 0){
-//                 n0[i]++;
-//             }
-//         }
-//     }
-
-//     // Sorting according to number of zeros in the matrix
-//     for (int i = 0; i < a.size(); i++){
-//         for ( int j = i; j < a.size(); j++){
-//             if (n0[i] > n0[j]){
-//                 temp = a[i];
-//                 a[i] = a[j];
-//                 a[j] = temp;
-//             }
-//         }
-//     }
-
-//     std::cout << "After sorting this is how the matrix looks like : " << std::endl;
-//     DisplayMatrix(a);
-//     std::cout << "\n\n" << std::endl;
-
-
-    
-//     // Finding REF
-//     int colindex = 0;
-//     for (int i = 0 ; i < a.size(); i++){
-//         while(a[i][colindex] == 0){
-//             if (colindex < a[0].size()){
-//                 colindex++;
-//             }
-//             else{
-//                 break;
-//             }
-//         }
-//         if (a[i][colindex]!=0){
-//             // Dividing the Row by the Initial non-zero value 
-//             std::cout << "--> Dividing Row" << i << " by " << a[i][colindex] << std::endl;
-//             I[i] = Rowdiv(I[i], a[i][colindex]);
-//             a[i]  = Rowdiv(a[i], a[i][colindex]);
-//             DisplayMatrix(a);
-//             std::cout << std::endl;
-//             DisplayMatrix(I);
-
-//             // Iterating over other rows to subtract and get zeroes below the pivot element
-//             for ( int j = i+1; j < a.size(); j++){
-//                 if (a[j][colindex]!=0){
-//                 temp = Rowmultiply(I[i], a[j][colindex]);
-//                 I[j] = RowsubRow(I[j], temp);
-//                 temp = Rowmultiply(a[i], a[j][colindex]);
-//                 std::cout << "->Multyplying Row " << i << " by " << a[j][colindex] << "and subtracting from Row " << j<< std::endl;
-//                 a[j] = RowsubRow(a[j],temp);
-//                 DisplayMatrix(a);
-//                 std::cout << std::endl;
-//                 DisplayMatrix(I);
-//                 }  
-//                 std::cout << std::endl;      
-//             }
-//         }
-//         else{
-//             std::cout << "\n there are no more non-zeros in this row" << std::endl;
-//         }
-//     }
-
-//     std::cout << "\n REF Found !" << std::endl;
-//     DisplayMatrix(a);
-//     std::cout << std::endl;
-//     DisplayMatrix(I);
-
-
-//     // Finding RREF
-//     int rindex = -1;
-//     int x = 0;
-//     int nosol = 0;
-//     for (int i = a.size()-1; i > -1 ; i--){
-//         std::cout << " \n\n Entering the Row : " << i << std::endl; 
-//         x = 0;
-//         for (int j = 0; j < a[0].size(); j++){
-
-//             if (x != 0 and a[i][j] !=0){ // Case where we found our pivot value but there seems to be another value
-//                 std::cout << " OK so our x and current element respectivelty are "<< x << " " << a[i][j] << std::endl;
-//                 nosol = 1;
-//                 break;
-//             }
-
-//             if (a[i][j] != 0){
-//                 x = a[i][j];
-//                 rindex = j;
-//             }
-
-//         }
-    
-//         if (x == 0){
-//             std::cout << "\n\nThere is no solution for this matrix / No Inverse !!\n\n";
-//             break;
-//         }
-//         else if (nosol == 0 and i > -1){
-//             for ( int j = i-1; j > -1; j--){
-//                 if (a[j][rindex] !=0){
-//                     temp = Rowmultiply(I[i], a[j][rindex]);
-//                     I[j] = RowsubRow(I[j],temp);
-//                     std::cout << "Subtracting Row " << i << " from " << j << std::endl; 
-//                     a[j][rindex] -= x*a[j][rindex];
-//                 }
-
-//             }
-//         }
-
-//     }
-//     std::cout << "\n\n Here is the inverse of the above matrix: \n" << std::endl;
-//     DisplayMatrix(I);
-//     return a;
-// }
-
-
 IntMatrix inverse(IntMatrix a){
-    int am = a.size();
-    int an = a[0].size();
-    IntMatrix I;
-    intRow Row;
-    if (am != an){
-        std::cerr << "The Given matrix is not a Square Matrix and hence the Inverse cannot be computed!" << std::endl;
-        return a;
-    }
-
-    // Creating an Identity Matrix
-    for (int i = 0 ; i < am; i++){
-        Row.clear();
-        for (int j = 0 ; j < am; j++){
-            if (i ==j){
-                Row.push_back(1);
-            } 
-            else{
-                Row.push_back(0);
-            }
-        }
-        I.push_back(Row);
-    }
- 
-    // Finding the number of zeros in each order 
-    std::vector<int> n0;
-    std::vector<float> temp;
-    for (int i = 0; i < a.size(); i++){
-        n0.push_back(0);
-        for ( int j = 0 ; j < a[0].size(); j++){
-            if (a[i][j] == 0){
-                n0[i]++;
-            }
-        }
-    }
-
-    // Sorting according to number of zeros in the matrix
-    for (int i = 0; i < a.size(); i++){
-        for ( int j = i; j < a.size(); j++){
-            if (n0[i] > n0[j]){
-                temp = a[i];
-                a[i] = a[j];
-                a[j] = temp;
-            }
-        }
-    }
-
-    // Finding REF
-    int colindex = 0;
-    for (int i = 0 ; i < a.size(); i++){
-        while(a[i][colindex] == 0){
-            if (colindex < a[0].size()){
-                colindex++;
-            }
-            else{
-                std::cout << "\n\n ERROR : The Given matrix is not invertible !!! \n\n" << std::endl;
-            }
-        }
-        if (a[i][colindex]!=0){
-            // Dividing the Row by the Initial non-zero value 
-            I[i] = Rowdiv(I[i], a[i][colindex]);
-            a[i]  = Rowdiv(a[i], a[i][colindex]);
-
-            // Iterating over other rows to subtract and get zeroes below the pivot element
-            for ( int j = i+1; j < a.size(); j++){
-                if (a[j][colindex]!=0){
-                temp = Rowmultiply(I[i], a[j][colindex]);
-                I[j] = RowsubRow(I[j], temp);
-                temp = Rowmultiply(a[i], a[j][colindex]);
-                a[j] = RowsubRow(a[j],temp);
-                }     
-            }
-        }
-        else{
-            std::cout << "\n there are no more non-zeros in this row" << std::endl;
-        }
-    }
-
-    // Finding RREF
-    int rindex = -1;
-    int x = 0;
-    int nosol = 0;
-    for (int i = a.size()-1; i > -1 ; i--){
-        x = 0;
-        for (int j = 0; j < a[0].size(); j++){
-
-            if (x != 0 and a[i][j] !=0){ // Case where we found our pivot value but there seems to be another value
-                nosol = 1;
-                break;
-            }
-
-            if (a[i][j] != 0){
-                x = a[i][j];
-                rindex = j;
-            }
-
-        }
     
-        if (x == 0){
-            std::cout << "\n\nThere is no solution for this matrix / No Inverse !!\n\n";
-            break;
+    
+    // Performing LU decomposition to find the Inverse
+    
+    IntMatrix L, U;
+    intRow Lrow, Urow;
+
+    // Initializing L and U matrices (Makes the Decomposition code look cleaner)
+
+
+    for (int i = 0; i < a.size(); i++){
+        
+        Lrow.clear();
+        Urow.clear();
+        
+        for (int j = 0; j < a.size(); j++){
+
+            // Appending the diagonal elements for U and L
+            if (i == j){
+                Urow.push_back(a[i][i]);
+                Lrow.push_back(1);
+            }
+
+            // Appending 0s for Lower triangular matrix
+            else if (i < j){
+                Lrow.push_back(0);
+                Urow.push_back(-1);
+            }
+
+            // Appending 0s for Upper triangular matrix
+            else if (i > j){
+                Urow.push_back(0);
+                Lrow.push_back(-1);
+            }
+
         }
-        else if (nosol == 0 and i > -1){
-            for ( int j = i-1; j > -1; j--){
-                if (a[j][rindex] !=0){
-                    temp = Rowmultiply(I[i], a[j][rindex]);
-                    I[j] = RowsubRow(I[j],temp);
-                    a[j][rindex] -= x*a[j][rindex];
-                }
+        L.push_back(Lrow);
+        U.push_back(Urow);
+
+    }
+
+    
+    // Performing LU decomposition
+    printf("--> Performing LU decomposition");
+
+    for (int k = 0; k < a.size(); k++){
+
+        U[k][k] = a[k][k];
+
+        for (int i = k+1; i < a.size(); i++){
+
+            L[i][k] = a[i][k]/a[k][k];
+            U[k][i] = a[k][i];
+
+        }
+
+        for (int i = k + 1; i < a.size(); i++){
+            
+            for (int j = k + 1; j < a.size(); j++){
+                
+                a[i][j] = a[i][j] - (L[i][k] * U[k][j]);
+            
+            }
+
+        }
+        
+    }
+
+    printf("\n\n");
+    DisplayMatrix(L);
+    printf("\n\n");
+    DisplayMatrix(U);
+    printf("\n\n");
+
+    // Initializing L_inverse and U_Inverse as Identity Matrices
+    intRow temprow;
+    IntMatrix L_inverse, U_inverse;
+    printf("--> Initializing L_inverse and U_inverse\n");
+    for (int i = 0 ; i < a.size(); i++){
+        
+        temprow.clear();
+
+        for (int j = 0; j < a.size(); j++){
+
+            if (i == j){
+                temprow.push_back(1);
+            }
+            else {
+                temprow.push_back(0);
+            }
+
+        }
+
+        U_inverse.push_back(temprow);
+        L_inverse.push_back(temprow);
+
+    }
+
+    // Finding the inverse of L
+    printf("--> Finding the Inverse of L\n");
+    for (int i = 0; i < L.size(); i++){
+        
+        // Checking if the next few rows have zero in that particular column
+        for (int j = 1; i+j <L.size(); j++){
+
+            if (L[i+j][i] != 0){
+
+                L_inverse[i+j] = RowsubRow(L_inverse[i+j],Rowmultiply(L_inverse[i],L[i+j][i]));
 
             }
         }
 
     }
-    return I;
+
+    // Finding the inverse of U
+    printf("--> Finding the Inverse of U\n");
+    for (int i = U.size()-1; i >= 0; i--){
+        
+        // Making diagonal elements = 1
+        if (U[i][i] != 1){
+            U_inverse[i] = Rowdiv(U_inverse[i],U[i][i]);
+        }
+
+        // Checking if the prev rows have zero in that particular column
+        for (int j = 1; i-j >= 0; j++){
+
+            if (U[i-j][i] != 0){
+
+                U_inverse[i-j] = RowsubRow(U_inverse[i-j],Rowmultiply(U_inverse[i],U[i-j][i]));
+
+            }
+        }
+
+    }
+    printf("--> Finding the Inverse of A");
+    IntMatrix A_inverse = multiply(U_inverse, L_inverse);
+    printf("\n\n The inverse is: \n");
+    DisplayMatrix(A_inverse);
+    return A_inverse;
+
+
+
 }
 
 IntMatrix transpose(IntMatrix a){
