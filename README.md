@@ -1,4 +1,4 @@
-# Linear-Algebra-Framework
+# Linear-Algebra-Library
 
 Functions Implemented:
 
