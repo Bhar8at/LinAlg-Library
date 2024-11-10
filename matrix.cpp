@@ -47,6 +47,26 @@ IntMatrix diff(IntMatrix a, IntMatrix b){
     }    
 }
 
+IntMatrix dot(IntMatrix a, IntMatrix b){
+     IntMatrix c;
+     intRow row;
+     if (a.size() == b.size() && a[0].size() == b[0].size()){
+        for (int i = 0; i < a.size(); i++ ){
+            row.clear();
+            for (int j = 0; j < a[i].size(); j++){
+                float x = a[i][j] * b[i][j];
+                row.push_back(x);
+        }
+        c.push_back(row);
+     }
+     return c;
+    }
+    else{
+        std::cerr << "The Dimensions Seem to be NOT the same !"<< std::endl;
+        return c;
+    }    
+}
+
 IntMatrix multiply(IntMatrix a, IntMatrix b){
     IntMatrix c;
     intRow row;
