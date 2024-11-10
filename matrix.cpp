@@ -47,6 +47,21 @@ IntMatrix diff(IntMatrix a, IntMatrix b){
     }    
 }
 
+IntMatrix multiply_by_constant(IntMatrix a, double k){
+    IntMatrix c;
+     intRow row;
+    for (int i = 0; i < a.size(); i++ ){
+        row.clear();
+        for (int j = 0; j < a[i].size(); j++){
+            float x = a[i][j] * k;
+            row.push_back(x);
+        }
+        c.push_back(row);
+     }
+     return c;
+    }
+
+
 IntMatrix dot(IntMatrix a, IntMatrix b){
      IntMatrix c;
      intRow row;
