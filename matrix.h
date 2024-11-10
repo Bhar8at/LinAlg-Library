@@ -13,6 +13,7 @@ typedef  std::vector<float> intRow;
 IntMatrix sum(IntMatrix a, IntMatrix b);
 IntMatrix diff(IntMatrix a, IntMatrix b);
 IntMatrix dot(IntMatrix a, IntMatrix b);
+IntMatrix multiply_by_constant(IntMatrix a, IntMatrix b);
 IntMatrix multiply(IntMatrix a, IntMatrix b);
 IntMatrix inverse(IntMatrix a);
 IntMatrix transpose(IntMatrix a );
